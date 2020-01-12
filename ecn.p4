@@ -7,7 +7,7 @@ const bit<16> TYPE_IPV4 = 0x800;
 const bit<16> TYPE_UDP = 0x800;
 #define MTU 1500
 #define maximumsize 32
-#define buffersize 10000
+#define buffersize 32
 
 /*************************************************************************
 *********************** H E A D E R S  ***********************************
@@ -155,7 +155,7 @@ control MyIngress(inout headers hdr,
             meta.encodingpointer = 0;
         }
         hdr.payload.input = meta.payloadtmp; 
-        //pointer.write(1,meta.encodingpointer);
+        pointer.write(1,meta.encodingpointer);
     }
 
     action decoding(){
@@ -174,7 +174,7 @@ control MyIngress(inout headers hdr,
             meta.encodingpointer = 0;
         }
         hdr.payload.input = meta.payloadtmp; 
-        //pointer.write(1,meta.encodingpointer);
+        pointer.write(1,meta.encodingpointer);
     }
 
     action forward(macAddr_t dstAddr, egressSpec_t port){
